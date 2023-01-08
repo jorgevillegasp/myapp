@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/modules/cart/services/cart_provider.dart';
 import 'package:myapp/modules/product/models/producto.dart';
 import 'package:myapp/modules/product/services/product_provider.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +17,7 @@ class Item extends StatefulWidget {
 class _ItemState extends State<Item> {
   @override
   Widget build(BuildContext context) {
-    final productProvider = Provider.of<ProductProvider>(context);
+    final carProvider = Provider.of<CartProvider>(context);
     return Column(
       children: [
         Container(
@@ -51,7 +52,7 @@ class _ItemState extends State<Item> {
             width: 33,
           ),
           onPressed: () {
-            productProvider.addProductCar(widget.product);
+            carProvider.addProductCar(widget.product);
             final snackBar = SnackBar(
               content: const Text('Agregado al carrito!'),
               action: SnackBarAction(

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/modules/product/models/category.dart';
 import 'package:myapp/modules/product/page/products_screen.dart';
 import 'package:myapp/modules/product/services/category_providers.dart';
-import 'package:myapp/modules/product/services/product_service.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen1 extends StatefulWidget {

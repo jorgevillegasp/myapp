@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/modules/aut/page/login_page.dart';
+import 'package:myapp/modules/cart/services/cart_provider.dart';
 import 'package:myapp/modules/product/page/home_screen1.dart';
 import 'package:myapp/modules/product/services/product_provider.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +16,7 @@ class CarritoScreen extends StatefulWidget {
 class _CarritoScreenState extends State<CarritoScreen> {
   @override
   Widget build(BuildContext context) {
-    final productsProvider = Provider.of<ProductProvider>(context);
+    final carProvider = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Shopping Cart"),
@@ -39,7 +40,7 @@ class _CarritoScreenState extends State<CarritoScreen> {
                           placeholder:
                               const AssetImage("assets/jar-loading.gif"),
                           image: NetworkImage(
-                              "https://gestion.promo.ec/${productsProvider.carProducts[index].imagenes[0]}"),
+                              "https://gestion.promo.ec/${carProvider.carProducts[index].imagenes[0]}"),
                           fit: BoxFit.cover,
                           width: 70,
                         ),
@@ -51,7 +52,8 @@ class _CarritoScreenState extends State<CarritoScreen> {
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
                               child: Text(
-                                  productsProvider.carProducts[index].nombre),
+                                carProvider.carProducts[index].nombre,
+                              ),
                             ),
                             Row(
                               children: [
@@ -61,13 +63,11 @@ class _CarritoScreenState extends State<CarritoScreen> {
                                   child: GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        productsProvider.deleteProduct(
-                                            productsProvider
-                                                .carProducts[index]);
+                                        carProvider.deleteProduct(
+                                            carProvider.carProducts[index]);
                                       });
 
-                                      if (productsProvider
-                                          .carProducts.isEmpty) {
+                                      if (carProvider.carProducts.isEmpty) {
                                         Navigator.of(context)
                                             .pushAndRemoveUntil(
                                                 MaterialPageRoute(
@@ -97,11 +97,12 @@ class _CarritoScreenState extends State<CarritoScreen> {
                                       const EdgeInsets.symmetric(horizontal: 5),
                                   child: GestureDetector(
                                     onTap: () {
-                                      setState(() {
-                                        productsProvider.addProductCar(
-                                            productsProvider
-                                                .carProducts[index]);
-                                      });
+                                      setState(
+                                        () {
+                                          carProvider.addProductCar(
+                                              carProvider.carProducts[index]);
+                                        },
+                                      );
                                     },
                                     child: Container(
                                       width: 25,
@@ -126,14 +127,14 @@ class _CarritoScreenState extends State<CarritoScreen> {
                       SizedBox(
                         width: 30,
                         child: Text(
-                          productsProvider.carProducts[index].cantidad
+                          carProvider.carProducts[index].cantidad
                               .toString(),
                         ),
                       ),
                       SizedBox(
                         width: 70,
                         child: Text(
-                          "\$ ${double.parse(productsProvider.carProducts[index].precio) * productsProvider.carProducts[index].cantidad}",
+                          "\$ ${double.parse(carProvider.carProducts[index].precio) * carProvider.carProducts[index].cantidad}",
                           style: const TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -146,7 +147,7 @@ class _CarritoScreenState extends State<CarritoScreen> {
                 );
               },
               separatorBuilder: (_, __) => const Divider(),
-              itemCount: productsProvider.carProducts.length,
+              itemCount: carProvider.carProducts.length,
             ),
           ),
           SizedBox(
@@ -181,7 +182,7 @@ class _CarritoScreenState extends State<CarritoScreen> {
                           ElevatedButton(
                             child: const Text("OK"),
                             onPressed: () {
-                              productsProvider.clearCar();
+                              carProvider.clearCar();
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(builder: (context) {
                                 return const HomeScreen1();
@@ -221,44 +222,44 @@ class _CarritoScreenState extends State<CarritoScreen> {
           ),
         ],
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      // floatingActionButton: FloatingActionButton.extended(
-      //   label: Row(
-      //     children: const [
-      //       Text("Terminar proceso de compra"),
-      //     ],
-      //   ),
-      //   onPressed: () async {
-      //     final prefs = await SharedPreferences.getInstance();
-      //     final key = prefs.getString('key') ?? "";
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton.extended(
+        label: Row(
+          children: const [
+            Text("Terminar proceso de compra"),
+          ],
+        ),
+        onPressed: () async {
+          final prefs = await SharedPreferences.getInstance();
+          final key = prefs.getString('key') ?? "";
 
-      //     if (key.isNotEmpty) {
-      //       showDialog(
-      //         context: context,
-      //         builder: (BuildContext context) {
-      //           return AlertDialog(
-      //             content: const Text(
-      //               "Compra Exitosa!",
-      //               style: TextStyle(fontSize: 20),
-      //             ),
-      //             actions: <Widget>[
-      //               ElevatedButton(
-      //                 child: const Text("OK"),
-      //                 onPressed: () {
-      //                   productsProvider.clearCar();
-      //                   Navigator.of(context).pushAndRemoveUntil(
-      //                       MaterialPageRoute(builder: (context) {
-      //                     return const HomeScreen1();
-      //                   }), (Route<dynamic> route) => false);
-      //                 },
-      //               ),
-      //             ],
-      //           );
-      //         },
-      //       );
-      //     }
-      //   },
-      // ),
+          if (key.isNotEmpty) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  content: const Text(
+                    "Compra Exitosa!",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  actions: <Widget>[
+                    ElevatedButton(
+                      child: const Text("OK"),
+                      onPressed: () {
+                        carProvider.clearCar();
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(builder: (context) {
+                          return const HomeScreen1();
+                        }), (Route<dynamic> route) => false);
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+        },
+      ),
     );
   }
 }

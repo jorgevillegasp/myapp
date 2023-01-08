@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/modules/cart/services/cart_provider.dart';
 import 'package:myapp/modules/product/page/home_screen1.dart';
 import 'package:myapp/modules/product/services/category_providers.dart';
 import 'package:myapp/modules/aut/services/login_provider.dart';
@@ -6,7 +7,6 @@ import 'package:myapp/modules/product/services/product_provider.dart';
 import 'package:myapp/shared/preferences.dart';
 import 'package:provider/provider.dart';
 
-import 'modules/aut/page/login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +23,7 @@ class Provedores extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => CategoryProvider()),
         ChangeNotifierProvider(create: (_) => ProductProvider()),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
         ChangeNotifierProvider(create: (_) => LoginProvider()),
       ],
       child: const MyApp(),
@@ -50,7 +51,6 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
           elevation: 0,
         ),
-        fontFamily: 'SanFranciscoPro',
         textTheme: const TextTheme(
           titleLarge: TextStyle(
             fontWeight: FontWeight.bold,

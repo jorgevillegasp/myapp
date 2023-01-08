@@ -16,7 +16,6 @@ class ProductProvider extends ChangeNotifier {
 
 
   List<Producto> products = [];
-  List<Producto> _carProducts = [];
 
   getProductos(int id) async {
     var url = Uri.https(
@@ -36,38 +35,4 @@ class ProductProvider extends ChangeNotifier {
     products = productResponse.productos;
     notifyListeners();
   }
-
-  addProductCar(Producto p) {
-    bool existProduct = false;
-
-    for (var product in _carProducts) {
-      if (p.idProducto == product.idProducto) {
-        product.cantidad++;
-        existProduct = true;
-      }
-    }
-    if (!existProduct) {
-      _carProducts.add(p);
-    }
-    notifyListeners();
-  }
-
-  clearCar() {
-    _carProducts.clear();
-    notifyListeners();
-  }
-
-  deleteProduct(Producto product) {
-    if (product.cantidad > 1) {
-      _carProducts.forEach((p) {
-        if (p.idProducto == product.idProducto) {
-          p.cantidad--;
-        }
-      });
-    } else {
-      _carProducts.remove(product);
-    }
-  }
-
-  List<Producto> get carProducts => _carProducts;
 }

@@ -34,7 +34,6 @@ class CategoryProvider extends ChangeNotifier {
     final response = await http.get(url);
     final categoryResponse = CategoryResponse.fromJson(response.body);
     categories = categoryResponse.resultados;
-    print("getCategories =  $categories");
     notifyListeners();
   }
 }

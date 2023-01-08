@@ -16,46 +16,71 @@ class _HomeScreen1State extends State<HomeScreen1> {
   @override
   Widget build(BuildContext context) {
     final categoryProvider = Provider.of<CategoryProvider>(context);
-
+    categoryProvider.getCategories();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Categorias"),
-      ),
-      body: ListView.separated(
-          padding: const EdgeInsets.all(8),
-          itemCount: categoryProvider.categories.length,
-          separatorBuilder: (_, __) => const SizedBox(height: 10),
-          itemBuilder: (context, index) {
-            return Container( 
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                shape: BoxShape.rectangle,
-                color: const Color.fromARGB(255, 135, 193, 207),
-              ),
-              child: ListTile(
-                title: Text(
-                  categoryProvider.categories[index].nombre,
-                  style: const TextStyle(
-                    fontSize: 17,
+      
+      body: Padding(
+        padding: const EdgeInsets.only(top: 60),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 50,
+                  vertical: 10,
+                ),
+                child: Text(
+                  "Categoria",
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    fontSize: 30,
                   ),
                 ),
-                onTap: () {
-                  categoryProvider.categoria = categoryProvider.categories[index];
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ProductsScreen();
+              ),
+            ),
+            SizedBox(
+              height: 600,
+              child: ListView.separated(
+                padding: const EdgeInsets.all(8),
+                itemCount: categoryProvider.categories.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 10),
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      shape: BoxShape.rectangle,
+                      color: const Color.fromARGB(255, 135, 193, 207),
+                    ),
+                    child: ListTile(
+                      title: Text(
+                        categoryProvider.categories[index].nombre,
+                        style: const TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      onTap: () {
+                        categoryProvider.categoria =
+                            categoryProvider.categories[index];
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const ProductsScreen();
+                            },
+                          ),
+                        );
                       },
                     ),
                   );
                 },
               ),
-            );
-          }
-          ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -28,27 +28,13 @@ class _ProductsScreenState extends State<ProductsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(categoriaProvider.categoria.nombre),
-      ),
-      body: ListView.builder(
-        itemCount: productsProvider.products.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ProductCard(
-            product: productsProvider.products[index],
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.shopping_cart),
-        onPressed: () {
-          if (carProvider.carProducts.isEmpty) {
+        actions: [
+          IconButton(
+            onPressed: () {
+              if (carProvider.carProducts.isEmpty) {
             final snackBar = SnackBar(
               content: const Text('No hay productos en el carrito!'),
-              action: SnackBarAction(
-                label: 'ok!!!',
-                onPressed: () {
-                  // Some code to undo the change.
-                },
-              ),
+              
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           } else {
@@ -56,6 +42,17 @@ class _ProductsScreenState extends State<ProductsScreen> {
               MaterialPageRoute(builder: (context) => const CarritoScreen()),
             );
           }
+            },
+            icon: const Icon(Icons.shopping_cart),
+          ),
+        ],
+      ),
+      body: ListView.builder(
+        itemCount: productsProvider.products.length,
+        itemBuilder: (BuildContext context, int index) {
+          return ProductCard(
+            product: productsProvider.products[index],
+          );
         },
       ),
     );

@@ -224,6 +224,12 @@ class _CarritoScreenState extends State<CarritoScreen> {
                 );
               },
             );
+          } else {
+            // ignore: use_build_context_synchronously
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) {
+              return const LoginPage();
+            }), (Route<dynamic> route) => false);
           }
         },
       ),

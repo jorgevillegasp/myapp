@@ -23,7 +23,7 @@ class _ItemState extends State<Item> {
         Container(
           height: 180,
           width: 160,
-          padding:const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: SizedBox(
             width: double.infinity,
             child: FadeInImage(
@@ -53,16 +53,34 @@ class _ItemState extends State<Item> {
           ),
           onPressed: () {
             carProvider.addProductCar(widget.product);
-            final snackBar = SnackBar(
-              content: const Text('Agregado al carrito!'),
-              action: SnackBarAction(
-                label: 'ok!!!',
-                onPressed: () {
-                  // Some code to undo the change.
-                },
+            /**
+             * 
+             * mensaje que aparece abajo
+             * 
+             */
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Container(
+                  padding: const EdgeInsets.all(16),
+                  height: 90,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.thumbs_up_down_outlined),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(child: Text("Se guardo en su carrito"))
+                    ],
+                  ),
+                ),
+                action: SnackBarAction(
+                  label: ' sapo ok!!!',
+                  onPressed: () {
+                    // Some code to undo the change.
+                  },
+                ),
               ),
             );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
           },
         ),
         //details_product(),

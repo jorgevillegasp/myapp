@@ -66,16 +66,37 @@ class _ProductCardState extends State<ProductCard> {
               onPressed: () {
                 carProvider.addProductCar(widget.product);
                 carProvider.totalAPagarProducto;
-                final snackBar = SnackBar(
-                  content: const Text('Agregado al carrito!'),
-                  action: SnackBarAction(
-                    label: 'ok!!!',
-                    onPressed: () {
-                      // Some code to undo the change.
-                    },
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    duration: const Duration(milliseconds: 400),
+                    content: Container(
+                      padding: const EdgeInsets.all(16),
+                      height: 50,
+                      decoration: const BoxDecoration(
+                        color: Colors.deepPurple,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                      ),
+                      child: Row(
+                        children: const [
+                          Icon(
+                            Icons.done,
+                            color: Colors.white,
+                            size: 25,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Expanded(child: Text("Se agrego al carrio"))
+                        ],
+                      ),
+                    ),
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
                   ),
                 );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
             ),
           ],

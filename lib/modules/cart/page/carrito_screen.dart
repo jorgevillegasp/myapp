@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:myapp/modules/aut/page/login_page.dart';
 import 'package:myapp/modules/cart/services/cart_provider.dart';
 import 'package:myapp/modules/product/page/home_screen1.dart';
-import 'package:myapp/modules/product/services/product_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -46,8 +45,9 @@ class _CarritoScreenState extends State<CarritoScreen> {
                         ),
                       ),
                       SizedBox(
-                        width: 120,
+                        width: 180,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
@@ -80,9 +80,9 @@ class _CarritoScreenState extends State<CarritoScreen> {
                                       width: 25,
                                       height: 25,
                                       decoration: BoxDecoration(
-                                          color: Colors.grey[300],
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
+                                        color: Colors.grey[300],
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
                                       child: const Icon(
                                         Icons.add,
                                         color: Colors.white,
@@ -91,7 +91,10 @@ class _CarritoScreenState extends State<CarritoScreen> {
                                     ),
                                   ),
                                 ),
-                                const Text("1"),
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 5),
+                                  child: Text("1"),
+                                ),
                                 Padding(
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 5),
@@ -99,6 +102,7 @@ class _CarritoScreenState extends State<CarritoScreen> {
                                     onTap: () {
                                       setState(
                                         () {
+                                          carProvider.totalAPagarProducto;
                                           carProvider.addProductCar(
                                               carProvider.carProducts[index]);
                                         },
@@ -110,7 +114,7 @@ class _CarritoScreenState extends State<CarritoScreen> {
                                       decoration: BoxDecoration(
                                           color: Colors.green[300],
                                           borderRadius:
-                                              BorderRadius.circular(20)),
+                                              BorderRadius.circular(5)),
                                       child: const Icon(
                                         Icons.add,
                                         color: Colors.white,
@@ -127,12 +131,11 @@ class _CarritoScreenState extends State<CarritoScreen> {
                       SizedBox(
                         width: 30,
                         child: Text(
-                          carProvider.carProducts[index].cantidad
-                              .toString(),
+                          carProvider.carProducts[index].cantidad.toString(),
                         ),
                       ),
                       SizedBox(
-                        width: 70,
+                        width: 80,
                         child: Text(
                           "\$ ${double.parse(carProvider.carProducts[index].precio) * carProvider.carProducts[index].cantidad}",
                           style: const TextStyle(
@@ -151,73 +154,37 @@ class _CarritoScreenState extends State<CarritoScreen> {
             ),
           ),
           SizedBox(
-            height: 25,
-            child: Column(
-              children: const [
-                Text(
-                  "Total",
-                  textAlign: TextAlign.start,
-                  style: TextStyle(),
+            height: 40,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Text(
+                      "Valor a pagar : ",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      carProvider.totalAPagarProducto.toString(),
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                )
               ],
-            ),
-          ),
-          SizedBox(
-            child: ElevatedButton(
-              child: const Text("Terminar compra"),
-              onPressed: () async {
-                final prefs = await SharedPreferences.getInstance();
-                final key = prefs.getString('key') ?? "";
-
-                if (key.isNotEmpty) {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        content: const Text(
-                          "Compra Exitosa!",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        actions: <Widget>[
-                          ElevatedButton(
-                            child: const Text("OK"),
-                            onPressed: () {
-                              carProvider.clearCar();
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(builder: (context) {
-                                return const HomeScreen1();
-                              }), (Route<dynamic> route) => false);
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        content: const Text(
-                          "Debe iniciar sesion",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        actions: <Widget>[
-                          ElevatedButton(
-                            child: const Text("OK"),
-                            onPressed: () {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(builder: (context) {
-                                return const LoginPage();
-                              }), (Route<dynamic> route) => false);
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
-              },
             ),
           ),
         ],

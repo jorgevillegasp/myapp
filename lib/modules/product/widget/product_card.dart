@@ -1,9 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:myapp/modules/cart/services/cart_provider.dart';
 import 'package:myapp/modules/product/models/producto.dart';
-import 'package:myapp/modules/product/services/product_provider.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
@@ -68,6 +65,7 @@ class _ProductCardState extends State<ProductCard> {
               ),
               onPressed: () {
                 carProvider.addProductCar(widget.product);
+                carProvider.totalAPagarProducto;
                 final snackBar = SnackBar(
                   content: const Text('Agregado al carrito!'),
                   action: SnackBarAction(

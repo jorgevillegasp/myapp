@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'My App',
 
-      home: Preferences.token.isEmpty ? const LoginPage() : const  HomeScreen1(),
+      home: const  HomeScreen1(),
 
       theme: ThemeData(
         useMaterial3: true,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/modules/aut/page/login_page.dart';
 import 'package:myapp/modules/product/page/home_screen1.dart';
 import 'package:myapp/modules/product/services/product_provider.dart';
 import 'package:provider/provider.dart';
@@ -23,21 +24,6 @@ class _CarritoScreenState extends State<CarritoScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // const SizedBox(
-          //   child: Padding(
-          //     padding: EdgeInsets.symmetric(
-          //       horizontal: 50,
-          //       vertical: 10,
-          //     ),
-          //     child: Text(
-          //       "Shopping Cart",
-          //       style: TextStyle(
-          //         fontWeight: FontWeight.bold,
-          //         fontSize: 21.0,
-          //       ),
-          //     ),
-          //   ),
-          // ),
           SizedBox(
             height: 600,
             child: ListView.separated(
@@ -61,26 +47,31 @@ class _CarritoScreenState extends State<CarritoScreen> {
                       SizedBox(
                         width: 120,
                         child: Column(
-                        
                           children: [
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
-                              child: Text(productsProvider.carProducts[index].nombre),),
+                              child: Text(
+                                  productsProvider.carProducts[index].nombre),
+                            ),
                             Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                                
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 5),
                                   child: GestureDetector(
                                     onTap: () {
                                       setState(() {
                                         productsProvider.deleteProduct(
-                                            productsProvider.carProducts[index]);
+                                            productsProvider
+                                                .carProducts[index]);
                                       });
-                                
-                                      if (productsProvider.carProducts.isEmpty) {
-                                        Navigator.of(context).pushAndRemoveUntil(
-                                            MaterialPageRoute(builder: (context) {
+
+                                      if (productsProvider
+                                          .carProducts.isEmpty) {
+                                        Navigator.of(context)
+                                            .pushAndRemoveUntil(
+                                                MaterialPageRoute(
+                                                    builder: (context) {
                                           return const HomeScreen1();
                                         }), (Route<dynamic> route) => false);
                                       }
@@ -88,7 +79,6 @@ class _CarritoScreenState extends State<CarritoScreen> {
                                     child: Container(
                                       width: 25,
                                       height: 25,
-                                      
                                       decoration: BoxDecoration(
                                           color: Colors.grey[300],
                                           borderRadius:
@@ -103,12 +93,14 @@ class _CarritoScreenState extends State<CarritoScreen> {
                                 ),
                                 const Text("1"),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 5),
                                   child: GestureDetector(
                                     onTap: () {
                                       setState(() {
                                         productsProvider.addProductCar(
-                                          productsProvider.carProducts[index]);
+                                            productsProvider
+                                                .carProducts[index]);
                                       });
                                     },
                                     child: Container(
@@ -193,6 +185,29 @@ class _CarritoScreenState extends State<CarritoScreen> {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(builder: (context) {
                                 return const HomeScreen1();
+                              }), (Route<dynamic> route) => false);
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: const Text(
+                          "Debe iniciar sesion",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        actions: <Widget>[
+                          ElevatedButton(
+                            child: const Text("OK"),
+                            onPressed: () {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(builder: (context) {
+                                return const LoginPage();
                               }), (Route<dynamic> route) => false);
                             },
                           ),

@@ -13,8 +13,8 @@ class HomeScreen1 extends StatefulWidget {
 class _HomeScreen1State extends State<HomeScreen1> {
   @override
   Widget build(BuildContext context) {
-    final categoryProvider = Provider.of<CategoryProvider>(context);
-    categoryProvider.getCategories();
+    final categoriaProvider = Provider.of<CategoryProvider>(context);
+    categoriaProvider.getCategories();
     return Scaffold(
       
       body: Padding(
@@ -41,7 +41,7 @@ class _HomeScreen1State extends State<HomeScreen1> {
               height: 600,
               child: ListView.separated(
                 padding: const EdgeInsets.all(8),
-                itemCount: categoryProvider.categories.length,
+                itemCount: categoriaProvider.categories.length,
                 separatorBuilder: (_, __) => const SizedBox(height: 10),
                 itemBuilder: (context, index) {
                 
@@ -54,7 +54,7 @@ class _HomeScreen1State extends State<HomeScreen1> {
                     ),
                     child: ListTile(
                       title: Text(
-                        categoryProvider.categories[index].nombre,
+                        categoriaProvider.categories[index].nombre,
                         style: const TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.bold,
@@ -62,8 +62,8 @@ class _HomeScreen1State extends State<HomeScreen1> {
                         ),
                       ),
                       onTap: () {
-                        categoryProvider.categoria =
-                            categoryProvider.categories[index];
+                        categoriaProvider.categoria =
+                            categoriaProvider.categories[index];
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {

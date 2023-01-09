@@ -15,7 +15,7 @@ class CarritoScreen extends StatefulWidget {
 class _CarritoScreenState extends State<CarritoScreen> {
   @override
   Widget build(BuildContext context) {
-    final carProvider = Provider.of<CartProvider>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Shopping Cart"),
@@ -43,7 +43,7 @@ class _CarritoScreenState extends State<CarritoScreen> {
                               placeholder:
                                   const AssetImage("assets/jar-loading.gif"),
                               image: NetworkImage(
-                                  "https://gestion.promo.ec/${carProvider.carProducts[index].imagenes[0]}"),
+                                  "https://gestion.promo.ec/${cartProvider.carProducts[index].imagenes[0]}"),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -57,7 +57,7 @@ class _CarritoScreenState extends State<CarritoScreen> {
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
                               child: Text(
-                                carProvider.carProducts[index].nombre,
+                                cartProvider.carProducts[index].nombre,
                               ),
                             ),
                             Row(
@@ -68,11 +68,11 @@ class _CarritoScreenState extends State<CarritoScreen> {
                                   child: GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        carProvider.deleteProduct(
-                                            carProvider.carProducts[index]);
+                                        cartProvider.deleteProduct(
+                                            cartProvider.carProducts[index]);
                                       });
 
-                                      if (carProvider.carProducts.isEmpty) {
+                                      if (cartProvider.carProducts.isEmpty) {
                                         Navigator.of(context)
                                             .pushAndRemoveUntil(
                                                 MaterialPageRoute(
@@ -107,9 +107,9 @@ class _CarritoScreenState extends State<CarritoScreen> {
                                     onTap: () {
                                       setState(
                                         () {
-                                          carProvider.totalAPagarProducto;
-                                          carProvider.addProductCar(
-                                              carProvider.carProducts[index]);
+                                          cartProvider.totalAPagarProducto;
+                                          cartProvider.addProductCar(
+                                              cartProvider.carProducts[index]);
                                         },
                                       );
                                     },
@@ -136,13 +136,13 @@ class _CarritoScreenState extends State<CarritoScreen> {
                       SizedBox(
                         width: 30,
                         child: Text(
-                          carProvider.carProducts[index].cantidad.toString(),
+                          cartProvider.carProducts[index].cantidad.toString(),
                         ),
                       ),
                       SizedBox(
                         width: 80,
                         child: Text(
-                          "\$ ${double.parse(carProvider.carProducts[index].precio) * carProvider.carProducts[index].cantidad}",
+                          "\$ ${double.parse(cartProvider.carProducts[index].precio) * cartProvider.carProducts[index].cantidad}",
                           style: const TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -155,7 +155,7 @@ class _CarritoScreenState extends State<CarritoScreen> {
                 );
               },
               separatorBuilder: (_, __) => const SizedBox(height: 10),
-              itemCount: carProvider.carProducts.length,
+              itemCount: cartProvider.carProducts.length,
             ),
           ),
           SizedBox(
@@ -180,7 +180,7 @@ class _CarritoScreenState extends State<CarritoScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      carProvider.totalAPagarProducto.toString(),
+                      cartProvider.totalAPagarProducto.toString(),
                       textAlign: TextAlign.start,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
@@ -211,8 +211,7 @@ class _CarritoScreenState extends State<CarritoScreen> {
               builder: (BuildContext context) {
                 return AlertDialog(
                   content: const Padding(
-                    padding:  EdgeInsets.all(15),
-                    
+                    padding: EdgeInsets.all(15),
                     child: SizedBox(
                       height: 100,
                       child: Center(
@@ -227,7 +226,7 @@ class _CarritoScreenState extends State<CarritoScreen> {
                     ElevatedButton(
                       child: const Text("Continuar"),
                       onPressed: () {
-                        carProvider.limpiarCarrito();
+                        cartProvider.limpiarCarrito();
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(builder: (context) {
                           return const HomeScreen1();

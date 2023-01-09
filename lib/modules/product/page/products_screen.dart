@@ -21,7 +21,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
   Widget build(BuildContext context) {
     final productsProvider = Provider.of<ProductProvider>(context);
     final categoriaProvider = Provider.of<CategoryProvider>(context);
-    final carProvider = Provider.of<CartProvider>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
 
     productsProvider.getProductos(categoriaProvider.categoria.idCategoria);
 
@@ -31,7 +31,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              if (carProvider.carProducts.isEmpty) {
+              if (cartProvider.carProducts.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       duration: const Duration(milliseconds: 1500),

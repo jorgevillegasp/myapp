@@ -3,6 +3,7 @@ import 'package:myapp/modules/product/models/producto.dart';
 
 class CartProvider extends ChangeNotifier {
   final List<Producto> _carProducts = [];
+  List<Producto> get carProducts => _carProducts;
 
   double _totalAPagarProducto = 0;
 
@@ -58,18 +59,17 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  deleteProduct(Producto prod) {
-    if (prod.cantidad > 1) {
+  deleteProduct(Producto producto) {
+    if (producto.cantidad > 1) {
       for (var p in _carProducts) {
-        if (p.idProducto == prod.idProducto) {
+        if (p.idProducto == producto.idProducto) {
           p.cantidad--;
         }
       }
     } else {
-      _carProducts.remove(prod);
+      _carProducts.remove(producto);
     }
-    calcularPago(false, prod);
+    calcularPago(false, producto);
   }
 
-  List<Producto> get carProducts => _carProducts;
 }

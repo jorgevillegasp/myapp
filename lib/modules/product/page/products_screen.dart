@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:myapp/modules/cart/page/carrito_screen.dart';
 import 'package:myapp/modules/cart/services/cart_provider.dart';
 import 'package:myapp/modules/product/models/producto.dart';
-import 'package:myapp/modules/product/page/detalle.dart';
+import 'package:myapp/modules/product/page/detalle_screen.dart';
 import 'package:myapp/modules/product/services/category_providers.dart';
 import 'package:myapp/modules/product/services/product_provider.dart';
-import 'package:myapp/modules/product/widget/product_card.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
@@ -28,14 +27,14 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Categoria"),
+        title: const Text("Categoria"),
         actions: [
           IconButton(
             onPressed: () {
               if (carProvider.carProducts.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      duration: const Duration(milliseconds: 400),
+                      duration: const Duration(seconds: 1),
                       content: Container(
                         padding: const EdgeInsets.all(16),
                         height: 50,

@@ -98,7 +98,19 @@ class _DettaleScreen extends State<DettaleScreen> {
             Text("Agregar al carrito"),
           ],
         ),
-        onPressed: () {},
+        onPressed: () {
+          cartProvider.addProductCar(productoProvider.producto);
+                final snackBar = SnackBar(
+                  content: const Text('Agregado al carrito!'),
+                  action: SnackBarAction(
+                    label: 'ok!!!',
+                    onPressed: () {
+                      // Some code to undo the change.
+                    },
+                  ),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        },
       ),
     );
   }

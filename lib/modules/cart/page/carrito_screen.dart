@@ -34,18 +34,23 @@ class _CarritoScreenState extends State<CarritoScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: FadeInImage(
-                          placeholder:
-                              const AssetImage("assets/jar-loading.gif"),
-                          image: NetworkImage(
-                              "https://gestion.promo.ec/${carProvider.carProducts[index].imagenes[0]}"),
-                          fit: BoxFit.cover,
-                          width: 70,
+                        padding: const EdgeInsets.all(8.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: SizedBox(
+                            height: 80,
+                            child: FadeInImage(
+                              placeholder:
+                                  const AssetImage("assets/jar-loading.gif"),
+                              image: NetworkImage(
+                                  "https://gestion.promo.ec/${carProvider.carProducts[index].imagenes[0]}"),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(
-                        width: 180,
+                        width: 150,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

@@ -16,6 +16,13 @@ class ProductProvider extends ChangeNotifier {
 
 
   List<Producto> products = [];
+  late Producto _producto;
+
+  Producto get producto => _producto;
+  set producto(Producto value){
+    _producto = value;
+    notifyListeners();
+  }
 
   getProductos(int id) async {
     var url = Uri.https(

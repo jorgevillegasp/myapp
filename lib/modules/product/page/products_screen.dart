@@ -104,6 +104,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   children: [
                     GestureDetector(
                       onTap: () {
+                        productsProvider.producto = productsProvider.products[index];
                         Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) => const DettaleScreen()),

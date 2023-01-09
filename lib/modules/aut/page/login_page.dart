@@ -27,16 +27,22 @@ class _LoginPage extends State<LoginPage> {
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<LoginProvider>(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         child: Form(
           key: formKey,
           child: ListView(
             children: [
+              SizedBox(
+                height: 250,
+                child: Image.asset('assets/login.png'),
+              ),
               const SizedBox(height: 15),
               const Text(
                 "LOGIN",
                 style: TextStyle(
+                  
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
@@ -72,7 +78,7 @@ class _LoginPage extends State<LoginPage> {
                 //onChanged: null,
               ),
               const SizedBox(height: 15),
-              TextButton(
+              ElevatedButton(
                 onPressed: () async {
                   final user = Usuario(
                     usuario: nombreController.text.trim(),
@@ -115,7 +121,10 @@ class _LoginPage extends State<LoginPage> {
                     );
                   }
                 },
-                child: const Text('Guardar'),
+                style: TextButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 95, 76, 179),
+                    foregroundColor: Colors.white),
+                child: const Text('Inisiar sesion'),
               ),
             ],
           ),
@@ -123,5 +132,4 @@ class _LoginPage extends State<LoginPage> {
       ),
     );
   }
-
 }

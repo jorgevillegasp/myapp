@@ -91,14 +91,35 @@ class _LoginPage extends State<LoginPage> {
                     ),
                   );
                 } else {
-                  final snackBar = SnackBar(
-                    content: const Text('Usuario o contrasena incorrecta!'),
-                    action: SnackBarAction(
-                      label: 'ok!!!',
-                      onPressed: () {},
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: const Duration(milliseconds: 400),
+                      content: Container(
+                        padding: const EdgeInsets.all(16),
+                        height: 50,
+                        decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 231, 136, 136),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                        ),
+                        child: Row(
+                          children: const [
+                            
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                              child: Text("Usuario y contraseña incorrecto"),
+                            ),
+                          ],
+                        ),
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
                     ),
                   );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 }
               },
               child: const Text('Guardar'),

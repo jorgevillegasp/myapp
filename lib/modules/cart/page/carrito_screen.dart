@@ -210,15 +210,24 @@ class _CarritoScreenState extends State<CarritoScreen> {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  content: const Text(
-                    "Compra Exitosa!",
-                    style: TextStyle(fontSize: 20),
+                  content: const Padding(
+                    padding:  EdgeInsets.all(15),
+                    
+                    child: SizedBox(
+                      height: 100,
+                      child: Center(
+                        child: Text(
+                          "Se realizo la compra con exito!",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ),
                   ),
-                  actions: <Widget>[
+                  actions: [
                     ElevatedButton(
-                      child: const Text("OK"),
+                      child: const Text("Continuar"),
                       onPressed: () {
-                        carProvider.clearCar();
+                        carProvider.limpiarCarrito();
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(builder: (context) {
                           return const HomeScreen1();

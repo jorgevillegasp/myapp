@@ -24,10 +24,39 @@ class _DettaleScreen extends State<DettaleScreen> {
           IconButton(
             onPressed: () {
               if (cartProvider.carProducts.isEmpty) {
-                const snackBar = SnackBar(
-                  content: Text('No hay productos en el carrito!'),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: const Duration(milliseconds: 400),
+                      content: Container(
+                        padding: const EdgeInsets.all(16),
+                        height: 50,
+                        decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 135, 193, 207),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                        ),
+                        child: Row(
+                          children: const [
+                            Icon(
+                              Icons.done,
+                              color: Colors.white,
+                              size: 25,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                              child: Text("No hay productos en el carrito"),
+                            ),
+                          ],
+                        ),
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                    ),
+                  );
               } else {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -100,16 +129,39 @@ class _DettaleScreen extends State<DettaleScreen> {
         ),
         onPressed: () {
           cartProvider.addProductCar(productoProvider.producto);
-                final snackBar = SnackBar(
-                  content: const Text('Agregado al carrito!'),
-                  action: SnackBarAction(
-                    label: 'ok!!!',
-                    onPressed: () {
-                      // Some code to undo the change.
-                    },
-                  ),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: const Duration(milliseconds: 600),
+                      content: Container(
+                        padding: const EdgeInsets.all(16),
+                        height: 50,
+                        decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 135, 193, 207),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                        ),
+                        child: Row(
+                          children: const [
+                            Icon(
+                              Icons.done,
+                              color: Colors.white,
+                              size: 25,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                              child: Text("Agregado al carrito de compras"),
+                            ),
+                          ],
+                        ),
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                    ),
+                  );
         },
       ),
     );

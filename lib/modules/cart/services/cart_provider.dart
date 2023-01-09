@@ -53,7 +53,7 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  clearCar() {
+  limpiarCarrito() {
     _carProducts.clear();
     notifyListeners();
   }

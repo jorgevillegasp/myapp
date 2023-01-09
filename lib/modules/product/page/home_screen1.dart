@@ -22,6 +22,21 @@ class _HomeScreen1State extends State<HomeScreen1> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 15,
+                ),
+                child: Text(
+                  "My Shop",
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 59, 50, 92),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                  ),
+                ),
+              ),
+            ),
             const SizedBox(
               child: Padding(
                 padding: EdgeInsets.symmetric(
@@ -29,10 +44,10 @@ class _HomeScreen1State extends State<HomeScreen1> {
                   vertical: 10,
                 ),
                 child: Text(
-                  "Categoria",
+                  "Categorias",
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
+                    color: Color.fromARGB(255, 116, 116, 116),
+                    fontSize: 18,
                   ),
                 ),
               ),

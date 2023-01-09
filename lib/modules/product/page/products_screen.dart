@@ -27,40 +27,39 @@ class _ProductoScreenState extends State<ProductoScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Categoria"),
+        title: Text(categoriaProvider.categoria.nombre),
         actions: [
           IconButton(
             onPressed: () {
               if (cartProvider.carProducts.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      duration: const Duration(milliseconds: 1500),
-                      content: Container(
-                        padding: const EdgeInsets.all(16),
-                        height: 50,
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 231, 136, 136),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20),
-                          ),
-                        ),
-                        child: Row(
-                          children: const [
-                            
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Expanded(
-                              child: Text("No hay productos en el carrito"),
-                            ),
-                          ],
+                  SnackBar(
+                    duration: const Duration(milliseconds: 1500),
+                    content: Container(
+                      padding: const EdgeInsets.all(16),
+                      height: 50,
+                      decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 231, 136, 136),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20),
                         ),
                       ),
-                      behavior: SnackBarBehavior.floating,
-                      backgroundColor: Colors.transparent,
-                      elevation: 0,
+                      child: Row(
+                        children: const [
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Expanded(
+                            child: Text("No hay productos en el carrito"),
+                          ),
+                        ],
+                      ),
                     ),
-                  );
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                  ),
+                );
               } else {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -73,23 +72,25 @@ class _ProductoScreenState extends State<ProductoScreen> {
         ],
       ),
       body: Column(
+        
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15),
             child: SizedBox(
-              height: 25,
+              height: 40,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: categoriaProvider.categories.length,
                 itemBuilder: (context, index) => Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
+                    horizontal: 15,
                     vertical: 2,
                   ),
                   child: GestureDetector(
                     child: Text(
                       categoriaProvider.categories[index].nombre,
                       style: const TextStyle(
+                        color: Color.fromARGB(255, 117, 67, 67),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -101,16 +102,6 @@ class _ProductoScreenState extends State<ProductoScreen> {
                     },
                   ),
                 ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 25),
-            child: Text(
-              categoriaProvider.categoria.nombre,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -128,7 +119,8 @@ class _ProductoScreenState extends State<ProductoScreen> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        productsProvider.producto = productsProvider.products[index];
+                        productsProvider.producto =
+                            productsProvider.products[index];
                         Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) => const DettaleScreen()),

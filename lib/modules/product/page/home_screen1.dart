@@ -44,6 +44,7 @@ class _HomeScreen1State extends State<HomeScreen1> {
                 itemCount: categoryProvider.categories.length,
                 separatorBuilder: (_, __) => const SizedBox(height: 10),
                 itemBuilder: (context, index) {
+                
                   return Container(
                     margin: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(

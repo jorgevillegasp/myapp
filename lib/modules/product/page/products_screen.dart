@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myapp/modules/cart/page/carrito_screen.dart';
 import 'package:myapp/modules/cart/services/cart_provider.dart';
 import 'package:myapp/modules/product/models/producto.dart';
+import 'package:myapp/modules/product/page/detalle.dart';
 import 'package:myapp/modules/product/services/category_providers.dart';
 import 'package:myapp/modules/product/services/product_provider.dart';
 import 'package:myapp/modules/product/widget/product_card.dart';
@@ -27,7 +28,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(categoriaProvider.categoria.nombre),
+        title: Text("Categoria"),
         actions: [
           IconButton(
             onPressed: () {
@@ -49,19 +50,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
       ),
       body: Column(
         children: [
-          const Padding(
-            
-            padding: EdgeInsets.symmetric(
-              vertical: 0,
-            ),
-            child: Text(
-              "Categorias",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15),
             child: SizedBox(
@@ -85,17 +73,20 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       setState(() {
                         categoriaProvider.categoria =
                             categoriaProvider.categories[index];
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const ProductsScreen();
-                            },
-                          ),
-                        );
                       });
                     },
                   ),
                 ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 25),
+            child: Text(
+              categoriaProvider.categoria.nombre,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -111,39 +102,47 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 itemBuilder: (context, index) => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: SizedBox(
-                            height: 175,
-                            child: FadeInImage(
-                              placeholder:
-                                  const AssetImage("assets/jar-loading.gif"),
-                              image: NetworkImage(
-                                  "https://gestion.promo.ec/${productsProvider.products[index].imagenes[0]}"),
-                              fit: BoxFit.cover,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => const DettaleScreen()),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: SizedBox(
+                              height: 175,
+                              child: FadeInImage(
+                                placeholder:
+                                    const AssetImage("assets/jar-loading.gif"),
+                                image: NetworkImage(
+                                    "https://gestion.promo.ec/${productsProvider.products[index].imagenes[0]}"),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            productsProvider.products[index].nombre,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              productsProvider.products[index].nombre,
+                              style: const TextStyle(
+                                color: Colors.black45,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            ("\$ ${productsProvider.products[index].precio}"),
                             style: const TextStyle(
-                              color: Colors.black45,
+                              color: Colors.black87,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
-                        Text(
-                          ("\$ ${productsProvider.products[index].precio}"),
-                          style: const TextStyle(
-                            color: Colors.black87,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -152,49 +151,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
           ),
         ],
       ),
-
-      // child: Column(
-      //   crossAxisAlignment: CrossAxisAlignment.start,
-      //   children: [
-      //     Column(
-      //       children: [
-      //         Container(
-      //           padding: const EdgeInsets.all(10),
-      //           height: 200,
-      //           width: 180,
-      //           decoration: BoxDecoration(
-      //               color: Colors.amber,
-      //               borderRadius: BorderRadius.circular(15)),
-      //           child: SizedBox(
-      //             child: FadeInImage(
-      //               placeholder: const AssetImage("assets/jar-loading.gif"),
-      //               image: NetworkImage(
-      //                   "https://gestion.promo.ec/${productsProvider.products[index].imagenes[0]}"),
-      //               fit: BoxFit.cover,
-      //             ),
-      //           ),
-      //         ),
-      //         Padding(
-      //           padding: const EdgeInsets.all(8.0),
-      //           child: Text(
-      //             productsProvider.products[index].nombre,
-      //             style: const TextStyle(
-      //               color: Colors.black45,
-      //             ),
-      //           ),
-      //         ),
-      //         Text(
-      //           ("\$ ${productsProvider.products[index].precio}"),
-      //           style: const TextStyle(
-      //             color: Colors.black87,
-      //             fontSize: 20,
-      //             fontWeight: FontWeight.bold,
-      //           ),
-      //         ),
-      //       ],
-      //     )
-      //   ],
-      // ),
     );
   }
 }

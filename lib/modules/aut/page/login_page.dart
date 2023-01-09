@@ -93,7 +93,7 @@ class _LoginPage extends State<LoginPage> {
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      duration: const Duration(seconds: 1),
+                      duration: const Duration(milliseconds: 1500),
                       content: Container(
                         padding: const EdgeInsets.all(16),
                         height: 50,

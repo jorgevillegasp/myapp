@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final categoryResponsive = categoryResponsiveFromMap(jsonString);
-
 import 'dart:convert';
 
 import 'package:myapp/modules/product/models/producto.dart';

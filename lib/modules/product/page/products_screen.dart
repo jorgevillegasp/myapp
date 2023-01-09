@@ -32,16 +32,16 @@ class _ProductsScreenState extends State<ProductsScreen> {
           IconButton(
             onPressed: () {
               if (carProvider.carProducts.isEmpty) {
-            final snackBar = SnackBar(
-              content: const Text('No hay productos en el carrito!'),
-              
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          } else {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const CarritoScreen()),
-            );
-          }
+                final snackBar = SnackBar(
+                  content: const Text('No hay productos en el carrito!'),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              } else {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) => const CarritoScreen()),
+                );
+              }
             },
             icon: const Icon(Icons.shopping_cart),
           ),

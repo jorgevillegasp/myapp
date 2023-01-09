@@ -59,9 +59,14 @@ class _ProductCardState extends State<ProductCard> {
               ),
             ),
             ElevatedButton(
-              child: Image.asset(
-                'assets/compra.png',
-                width: 33,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 0),
+                child: Row(
+                  children: const [
+                    Text("Agregar al carrito"),
+                    Icon(Icons.shopping_cart)
+                  ],
+                ),
               ),
               onPressed: () {
                 carProvider.addProductCar(widget.product);
@@ -73,7 +78,7 @@ class _ProductCardState extends State<ProductCard> {
                       padding: const EdgeInsets.all(16),
                       height: 50,
                       decoration: const BoxDecoration(
-                        color: Colors.deepPurple,
+                        color: Color.fromARGB(255, 135, 193, 207),
                         borderRadius: BorderRadius.all(
                           Radius.circular(20),
                         ),

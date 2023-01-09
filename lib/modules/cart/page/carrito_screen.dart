@@ -149,7 +149,7 @@ class _CarritoScreenState extends State<CarritoScreen> {
                   ),
                 );
               },
-              separatorBuilder: (_, __) => const Divider(),
+              separatorBuilder: (_, __) => const SizedBox(height: 10),
               itemCount: carProvider.carProducts.length,
             ),
           ),
@@ -193,7 +193,7 @@ class _CarritoScreenState extends State<CarritoScreen> {
       floatingActionButton: FloatingActionButton.extended(
         label: Row(
           children: const [
-            Text("Terminar proceso de compra"),
+            Text("Confirmar compra"),
           ],
         ),
         onPressed: () async {

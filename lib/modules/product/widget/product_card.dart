@@ -25,7 +25,7 @@ class _ProductCardState extends State<ProductCard> {
         child: Column(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(15),
               child: SizedBox(
                 width: double.infinity,
                 child: FadeInImage(

@@ -8,14 +8,14 @@ import 'package:myapp/modules/product/services/product_provider.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
-class ProductsScreen extends StatefulWidget {
-  const ProductsScreen({Key? key}) : super(key: key);
+class ProductoScreen extends StatefulWidget {
+  const ProductoScreen({Key? key}) : super(key: key);
 
   @override
-  State<ProductsScreen> createState() => _ProductsScreenState();
+  State<ProductoScreen> createState() => _ProductoScreenState();
 }
 
-class _ProductsScreenState extends State<ProductsScreen> {
+class _ProductoScreenState extends State<ProductoScreen> {
   final products = <Producto>[];
   @override
   Widget build(BuildContext context) {

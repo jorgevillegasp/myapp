@@ -35,16 +35,17 @@ class _LoginPage extends State<LoginPage> {
           child: ListView(
             children: [
               SizedBox(
-                height: 250,
+                height: 300,
                 child: Image.asset('assets/login.png'),
               ),
-              const SizedBox(height: 15),
-              const Text(
-                "LOGIN",
-                style: TextStyle(
-                  
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+              const Center(
+                child: Text(
+                  "LOGIN",
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 56, 47, 109),
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const SizedBox(height: 30),
@@ -122,8 +123,9 @@ class _LoginPage extends State<LoginPage> {
                   }
                 },
                 style: TextButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 95, 76, 179),
-                    foregroundColor: Colors.white),
+                  backgroundColor: const Color.fromARGB(255, 95, 76, 179),
+                  foregroundColor: Colors.white,
+                ),
                 child: const Text('Inisiar sesion'),
               ),
             ],
